@@ -1,6 +1,14 @@
-import React from 'react';
-import '../../styles/global.css';
+import React, { useState } from 'react';
+import '../styles/global.css';
 
-const MyApp = ({ Component, pageProps }) => <Component {...pageProps} />;
+import { ChallengesProvider } from '../contexts/ChallengesContext';
+
+const MyApp: React.FC = ({ Component, pageProps }) => {
+  return (
+    <ChallengesProvider>
+      <Component {...pageProps} />
+    </ChallengesProvider>
+  );
+};
 
 export default MyApp;
