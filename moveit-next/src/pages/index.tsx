@@ -7,6 +7,7 @@ import Profile from '../components/Profile';
 
 import styles from '../styles/pages/Home.module.css';
 import ChallengeBox from '../components/ChallengeBox';
+import { CountdownProvider } from '../contexts/CountdownContext';
 
 const Home: React.FC = () => {
   return (
@@ -16,16 +17,18 @@ const Home: React.FC = () => {
       </Head>
       <ExperienceBar />
 
-      <section>
-        <div>
-          <Profile />
-          <CompletedChallenges />
-          <Contdown />
-        </div>
-        <div>
-          <ChallengeBox />
-        </div>
-      </section>
+      <CountdownProvider>
+        <section>
+          <div>
+            <Profile />
+            <CompletedChallenges />
+            <Contdown />
+          </div>
+          <div>
+            <ChallengeBox />
+          </div>
+        </section>
+      </CountdownProvider>
     </div>
   );
 };

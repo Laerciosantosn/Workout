@@ -1,4 +1,6 @@
-import { createContext, useState, ReactNode } from 'react';
+// eslint-disable-next-line
+import { browser } from 'node:process';
+import { createContext, useState, ReactNode, useEffect } from 'react';
 import challenges from '../../challenges.json';
 
 interface Challenge {
@@ -16,6 +18,7 @@ interface ChallengeContextData {
   levelUp: () => void;
   startNewChallenge: () => void;
   restChallenge: () => void;
+  completeChallenge: () => void;
 }
 
 interface ChallengesProviderProps {
@@ -31,20 +34,52 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
 
   const [activeChallenge, setActiveChallenge] = useState(null);
 
-  const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
+  // const experienceToNextLevel = Math.pow((level + 1) * 4, 2);
+  const experienceToNextLevel = ((level + 1) * 4) ** 2;
+
+  useEffect(() => {
+    Notification.requestPermission();
+  }, []);
 
   function levelUp() {
     setLevel(level + 1);
   }
+
   function startNewChallenge() {
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length);
     const challenge = challenges[randomChallengeIndex];
 
     setActiveChallenge(challenge);
+
+    new Audio('/notification.mp3').play();
+
+    if (Notification.permission === 'granted') {
+      const notification = new Notification('Novo desafio', {
+        body: `Valendo ${challenge.amount}xp!`,
+      });
+    }
   }
 
   function restChallenge() {
     setActiveChallenge(null);
+  }
+
+  function completeChallenge() {
+    if (!activeChallenge) {
+      /* empty */
+    }
+    const { amount } = activeChallenge;
+
+    let finalExperience = currentExperience + amount;
+
+    if (finalExperience >= experienceToNextLevel) {
+      finalExperience -= experienceToNextLevel;
+      levelUp();
+    }
+
+    setCurrentExperience(finalExperience);
+    setActiveChallenge(null);
+    setChallengesCompleted(challengesCompleted + 1);
   }
 
   return (
@@ -58,6 +93,7 @@ export function ChallengesProvider({ children }: ChallengesProviderProps) {
         activeChallenge,
         restChallenge,
         experienceToNextLevel,
+        completeChallenge,
       }}
     >
       {children}
