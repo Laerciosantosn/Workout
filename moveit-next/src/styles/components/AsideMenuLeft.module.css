@@ -6,8 +6,8 @@
   top: 0%;
   left: 0%;
   padding: 24px 0;
-  background: wheat;
-
+  background:linear-gradient(#f1f2f0, #ffffff);
+  border: 1px solid #d7d8da;
   align-items: center;
   justify-content: center;
   display: grid;
@@ -36,6 +36,7 @@
 
 .asideLeft .menu .iconMenu {
   color: #B5B5B5;
+  cursor: pointer;
 }
 
 .asideLeft .menu .iconMenu:not(:last-child) {

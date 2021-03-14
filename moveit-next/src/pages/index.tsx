@@ -8,6 +8,7 @@ import Profile from '../components/Profile';
 import ChallengeBox from '../components/ChallengeBox';
 
 import styles from '../styles/pages/Home.module.css';
+
 import { CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
 import AsideMenuLeft from '../components/AsideMenuLeft';
@@ -18,7 +19,6 @@ interface HomeProps {
   challengesCompleted: number;
 }
 
-// eslint disable-next-line
 const Home = (props: HomeProps) => {
   return (
     <ChallengesProvider
