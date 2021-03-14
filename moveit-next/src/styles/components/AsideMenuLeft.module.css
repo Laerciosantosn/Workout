@@ -1,0 +1,71 @@
+.asideLeft {
+  height: 100vh;
+  width: 90px;
+  /* position: fixed; */
+  z-index: 1;
+  top: 0%;
+  left: 0%;
+  padding: 24px 0;
+  background: wheat;
+
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.asideLeft .iconLogo {
+  width: 41px;
+  height: 36px;
+}
+
+.asideLeft .menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+}
+
+.asideLeft .menu .iconMenu,
+.asideLeft .iconPower {
+  height: 30px;
+  width: 30px;
+}
+
+.asideLeft .menu .iconMenu {
+  color: #B5B5B5;
+}
+
+.asideLeft .menu .iconMenu:not(:last-child) {
+  margin-bottom: 42px;
+}
+
+.asideLeft .menu div {
+height: 100%;
+}
+
+.asideLeft .menu .isActive {
+  position: relative;
+  color: #5965E0;  
+}
+
+.asideLeft .menu div.isActive::before {
+  content: "";
+  position: absolute;
+  left: -58px;
+  top: 13px;
+  height: 4px;
+  border-radius: 5px;
+  width: 60px;
+  background: #5965E0;
+  transform: rotate(90deg);
+  
+}
+
+.asideLeft .iconPower {
+  color: #FD0056;
+  display: flex;
+  justify-self: center;
+}
